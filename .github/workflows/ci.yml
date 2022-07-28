@@ -2,17 +2,12 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-
-      matrix: { dir: ["site", "site_guides"] }
 
     steps:
       - name: Checkout repository
@@ -24,11 +19,9 @@ jobs:
           node-version: 14
 
       - name: Install dependencies
-        working-directory: ${{ matrix.dir }}
         run: yarn install
 
       - name: Install dependencies
-        working-directory: ${{ matrix.dir }}
         run: yarn lint
 
       # Prepare the Pull Request Payload artifact. If this fails, we
